@@ -1,0 +1,46 @@
+﻿@model TechTest.Models.IndexViewModel
+
+@{
+	ViewBag.Title = "Currency converter";
+}
+<h2>@ViewBag.Title</h2>
+<div class="panel">
+	<div class="panel-body">
+		@using (Html.BeginForm("Convert", "Home", null, FormMethod.Post))
+		{
+		<div class="row">
+			<div class="col-lg-2">
+				<strong>From:</strong>
+			</div>
+			<div class="col-lg-4">
+				@Html.DropDownListFor(x => x.From, Model.FromCurrencies, new { @class = "form-control", required = "true" })
+			</div>
+			<div class="col-lg-2">
+				<strong>To:</strong>
+			</div>
+			<div class="col-lg-4">
+				@Html.DropDownListFor(x => x.To, Model.ToCurrencies, new { @class = "form-control", required = "true" })
+			</div>
+		</div>
+			<br/>
+			<div class="row">
+				<div class="col-lg-2">
+					<strong>Amount:</strong>
+				</div>
+				<div class="col-lg-4">
+					@Html.TextBox("Amount", Model.Amount?.ToString() ?? "", new { @class = "form-control", type = "number", required = "true", step = "0.01", min = "0.01" })
+				</div>
+				<div class="col-lg-2">
+					<strong>Converted amount:</strong>
+				</div>
+				<div class="col-lg-4">
+					<input class="form-control" disabled="disabled" value="@Model.ConvertedAmount">
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<button name="submit" type="submit" class="btn btn-primary pull-right" value="submit">Convert</button>
+			</div>
+		}
+		</div>
+</div>
